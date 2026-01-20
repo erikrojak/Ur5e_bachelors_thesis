@@ -1,0 +1,20 @@
+ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur5e robot_ip:=ur-demo-robot-api launch_rviz:=true external_control:=true launch_external_controller:=true
+ros2 launch ur_robot_driver ur_control.launch.py     ur_type:=ur5e     robot_ip:=ur-demo-robot-api  external_control:=true
+sudo docker compose -f docker-compose.yml -f docker-compose.sim.yml up
+source /opt/ros/jazzy/setup.bash --> if not working
+unset GTK_PATH -> for aruco stuff
+
+sudo apt update
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+
+Build
+
+cd ~/ur_ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+
+TF transform -> 4 markery na rohy stolu, posunut robota nad kazdy jeden, zaznamenat jeho poziciu a quaterniony (pose.py)
+zaznamenat poziciu markerov (rovnake az na z, to je opacne), odstranit robota, detekovat s kamerov, zaznamenat markery as well, 
+Vypocitam kde sa v priestore nachadza kamera s ohladom na base robota, vyuzit Transform.py, vypisat poziciu z vystupu programu 
+a publishnut ros2 run tf2_ros static_transform_publisher x y z qx qy qz qw base_link camera_link
