@@ -1,0 +1,56 @@
+ROBOT BASE LINK
+
+hore lavo
+Current EE pose in 'base_link':
+  Position: x=0.2644  y=0.4008  z=0.3694
+  Orientation (quat): x=0.2303  y=0.8970  z=0.3650  w=-0.0955
+
+marker 1 
+Position: x=0.2644  y=0.4008  z=0.3694
+Marker quaternion (xyzw): [-0.09546897  0.36578111 -0.89670855 -0.23022517]
+
+hore pravo
+Current EE pose in 'base_link':
+  Position: x=-0.2657  y=0.4083  z=0.3808
+  Orientation (quat): x=-0.2715  y=0.8921  z=0.3425  w=0.1145
+
+marker 0
+Position: x=-0.2657  y=0.4083  z=0.3808
+Marker quaternion (xyzw): [ 0.11450165  0.34250494 -0.89211286  0.27150392]
+
+dole lavo 
+Current EE pose in 'base_link':
+  Position: x=0.2648  y=0.6870  z=0.6568
+  Orientation (quat): x=0.0498  y=0.9141  z=0.4015  w=-0.0263
+
+marker 3
+Position: x=0.2648  y=0.6870  z=0.6568
+Marker quaternion (xyzw): [-0.02630062  0.40150948 -0.91412158 -0.04980118]
+
+
+dole vpravo
+Current EE pose in 'base_link':
+  Position: x=-0.2513  y=0.6860  z=0.6547
+  Orientation (quat): x=-0.2145  y=0.8984  z=0.3751  w=0.0788
+
+marker 4
+  Position: x=-0.2513  y=0.6860  z=0.6547
+  Marker quaternion (xyzw): [ 0.07879834  0.37509207 -0.89838102  0.21449547]
+
+CAMERA LINK
+
+Detected marker IDs: [4, 0, 1, 3]
+ ID 4 -> t (m): [0.585, 0.165, 0.741]  rvec (rad): [-2.861, 0.133, -0.841]
+ ID 0 -> t (m): [0.780, -0.139, 1.011]  rvec (rad): [-3.334, -0.162, -0.815]
+ ID 1 -> t (m): [0.110, -0.097, 0.549]  rvec (rad): [0.233, -2.571, 1.026]
+ ID 3 -> t (m): [0.046, 0.135, 0.431]  rvec (rad): [2.363, 0.073, -0.387]
+
+markers in quaternion 
+ID 1  quat_xyzw (camera): [ 0.08249221 -0.91024663  0.36324895  0.18082119]
+ID 0  quat_xyzw (camera): [-0.95982408 -0.04663812 -0.23463006 -0.14666751]
+ID 3  quat_xyzw (camera): [ 0.91856845  0.02837727 -0.15043842  0.36441051]
+ID 4  quat_xyzw (camera): [-0.95551951  0.04441947 -0.28087798  0.07821084]
+
+camera_link
+Position (m): [0.2111929  0.47347043 0.95048231]
+Orientation (quat): [-0.44112277  0.87741514  0.18415815  0.04048633]

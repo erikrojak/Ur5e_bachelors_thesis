@@ -1,27 +1,26 @@
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 
-# Assume lists: base_positions (4x3), base_quats (4x4), cam_positions (4x3), cam_quats (4x4)
 # Compute per-marker transforms
-base_positions = [np.array([0.5, 0.0, 0.2]),
-                  np.array([0.6, 0.1, 0.25]),
-                  np.array([0.4, -0.1, 0.22]),
-                  np.array([0.55, 0.05, 0.23])
+base_positions = [np.array([0.2644, 0.4008, 0.3694]),
+                  np.array([-0.2657, 0.4083, 0.3808]),
+                  np.array([0.2648, 0.6870, 0.6568]),
+                  np.array([-0.2513, 0.6860, 0.6547])
                   ]
-base_quats = [np.array([0.0, 0.0, 0.0, 1.0]),
-              np.array([0.0, 0.0, 0.1, 0.995]),
-              np.array([0.0, 0.0, -0.1, 0.995]),
-              np.array([0.0, 0.0, 0.05, 0.99875])]
+base_quats = [np.array([-0.09546, 0.36578, -0.8967, -0.2302]),
+              np.array([0.1145, 0.3425, -0.8921, 0.2715]),
+              np.array([-0.2630, 0.4015, -0.9141 , -0.0498]),
+              np.array([0.079, 0.3750, -0.8983, 0.2144])]
 
-cam_positions = [np.array([0.1, 0.0, 0.5]),
-                np.array([0.15, 0.05, 0.55]),
-                np.array([0.05, -0.05, 0.52]),
-                np.array([0.12, 0.02, 0.53])
+cam_positions = [np.array([0.110, -0.097, 0.549]),#1
+                np.array([0.780, -0.139, 1.011]),#0
+                np.array([0.046, 0.135, 0.431]),#3
+                np.array([0.585, 0.165, 0.741])#4
                 ]
-cam_quats = [np.array([0.0, 0.0, 0.0, 1.0]),
-            np.array([0.0, 0.0, 0.1, 0.995]),
-            np.array([0.0, 0.0, -0.1, 0.995]),
-            np.array([0.0, 0.0, 0.05, 0.99875])]
+cam_quats = [np.array([0.0825, -0.9102, 0.3632, 0.1808]),
+            np.array([-0.9598, -0.04664, -0.2346, -0.1467]),
+            np.array([0.9186, 0.0283, -0.1504, 0.3644]),
+            np.array([-0.9555, 0.0444, -0.2808, 0.07821])]
 # Compute T_base_camera for each marker observation
 
 T_base_cam_estimates = []
@@ -40,7 +39,7 @@ for i in range(4):
 # Average translation
 avg_pos = np.mean([T[:3, 3] for T in T_base_cam_estimates], axis=0)
 
-# Average rotation (simple way)
+# Average rotation 
 avg_rot_mat = np.mean([T[:3, :3] for T in T_base_cam_estimates], axis=0)
 U, _, Vt = np.linalg.svd(avg_rot_mat)
 avg_rot = U @ Vt

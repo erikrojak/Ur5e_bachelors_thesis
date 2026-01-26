@@ -9,8 +9,8 @@ class EEPoseGetter(Node):
     def __init__(self):
         super().__init__('ee_pose_getter')
         
-        self.ee_link = "tool0"          # Change if your TCP is named differently (e.g. "grasp_frame", "tcp")
-        self.target_frame = "base_link" # Usually this one for robot base frame
+        self.ee_link = "tool0"          
+        self.target_frame = "base_link" 
         
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
@@ -52,6 +52,13 @@ class EEPoseGetter(Node):
                 f"  Position: x={p.x:.4f}  y={p.y:.4f}  z={p.z:.4f}\n"
                 f"  Orientation (quat): x={q.x:.4f}  y={q.y:.4f}  z={q.z:.4f}  w={q.w:.4f}"
             )
+            with open('/home/erik/ur5e_ws/Hand_eye_calibration/pose.txt', 'w') as f:
+                f.write(
+                    f"Current EE pose in '{self.target_frame}':\n"
+                    f"  Position: x={p.x:.4f}  y={p.y:.4f}  z={p.z:.4f}\n"
+                    f"  Orientation (quat): x={q.x:.4f}  y={q.y:.4f}  z={q.z:.4f}  w={q.w:.4f}\n"
+                )
+            return
         else:
             self.get_logger().warn("No valid pose available yet – check TF tree")
 
@@ -62,7 +69,7 @@ def main(args=None):
     try:
         while rclpy.ok():
             node.run_once()
-            rclpy.spin_once(node, timeout_sec=1.0)  # Check every second (adjust as needed)
+            rclpy.spin_once(node, timeout_sec=1.0)  # Check every second
     except KeyboardInterrupt:
         pass
     finally:
