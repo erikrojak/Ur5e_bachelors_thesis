@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from build.ur_dashboard_msgs.ament_cmake_python.ur_dashboard_msgs.ur_dashboard_msgs import msg
 import rclpy
 from rclpy.node import Node
 from rclpy.duration import Duration
@@ -13,7 +12,7 @@ from tf2_geometry_msgs.tf2_geometry_msgs import do_transform_pose
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 from moveit_msgs.action import MoveGroup
-from moveit_msgs.msg import PlannerInterfaceDescription, Constraints, PositionConstraint, OrientationConstraint, MoveItErrorCodes
+from moveit_msgs.msg import PlannerInterfaceDescription, Constraints, PositionConstraint, OrientationConstraint
 from shape_msgs.msg import SolidPrimitive
 from std_msgs.msg import Header
 
@@ -73,7 +72,6 @@ class ArucoToMoveIt(Node):
             hover_pose.pose = target_pose_base.pose
             hover_pose.pose.position.z += 0.08 
             hover_pose.pose.position.y -= 0.08
-            hover_pose.pose.position.x = 0.00
 
             self.get_logger().info(
                 f"Planning to hover above marker: "
@@ -102,24 +100,8 @@ class ArucoToMoveIt(Node):
 
             # Send goal asynchronously
             
-            send_future = self.action_client.send_goal_async(goal)
-            rclpy.spin_until_future_complete(self, send_future, timeout_sec=15.0)
-
-            if not send_future.done() or not send_future.result().accepted:
-                self.get_logger().warn("MoveIt hover goal rejected")
-                return
-
-            goal_handle = send_future.result()
-            result_future = goal_handle.get_result_async()
-            rclpy.spin_until_future_complete(self, result_future, timeout_sec=30.0)
-
-            result = result_future.result().result
-            if result.error_code.val == MoveItErrorCodes.SUCCESS:
-                self.get_logger().info("Hover reached → sending robot home")
-                self.home()
-                rclpy.sleep(6.0)
-            else:
-                self.get_logger().warn(f"Hover failed — code {result.error_code.val}")
+            send_goal_future = self.action_client.send_goal_async(goal)
+            send_goal_future.add_done_callback(self.goal_response_callback)
 
         except Exception as e:
             self.get_logger().error(f"Error preparing goal: {e}")

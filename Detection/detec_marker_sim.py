@@ -11,7 +11,7 @@ class FakeArucoPublisher(Node):
         super().__init__('fake_aruco_publisher')
 
         self.declare_parameter('frame_id', 'camera_link')
-        self.declare_parameter('publish_rate', 0.2)  # Hz
+        self.declare_parameter('publish_rate', 5.0)  # Hz
 
         self.frame_id = self.get_parameter('frame_id').value
         rate = self.get_parameter('publish_rate').value
@@ -26,11 +26,10 @@ class FakeArucoPublisher(Node):
         self.get_logger().info("Use these IDs / positions for simulation testing")
 
         self.markers = [
-
             {
                 'id': 1,
-                'position': [0.4, 0.0, 0.1451],
-                'orientation': [0.005, -0.305,  0.597, -0.740]
+                'position': [0.50, 0.70, 0.70],     # in camera frame: ~70 cm below camera (along optical axis)
+                'orientation': [0.0, 0.0, 0.0, 1.0] # identity → marker Z points along camera Z (toward camera)
             },
         ]
 
