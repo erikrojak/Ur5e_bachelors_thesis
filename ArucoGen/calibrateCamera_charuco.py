@@ -10,8 +10,8 @@ IMAGE_FOLDER = "calibration_images"
 # ChArUco board parameters
 SQUARES_X = 5          # number of chessboard squares (X)
 SQUARES_Y = 7          # number of chessboard squares (Y)
-SQUARE_LENGTH = 1.0    # set real size if you want metric units
-MARKER_LENGTH = 0.7    # typically 0.65–0.8 * SQUARE_LENGTH
+SQUARE_LENGTH = 0.049    # set real size if you want metric units
+MARKER_LENGTH = 0.028    # typically 0.65–0.8 * SQUARE_LENGTH
 
 ARUCO_DICT = cv2.aruco.DICT_4X4_50
 # ------------------------------

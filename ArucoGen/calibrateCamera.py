@@ -67,8 +67,8 @@ print("\nDistortion Coefficients:\n", dist_coeffs)
 print("------------------------------------")
 
 # Save results
-np.save("camera_matrix.npy", camera_matrix)
-np.save("dist_coeffs.npy", dist_coeffs)
+np.save("camera_matrix_charuco.npy", camera_matrix)
+np.save("dist_coeffs_charuco.npy", dist_coeffs)
 
 print("\nSaved:")
 print(" -> camera_matrix.npy")

@@ -2,29 +2,20 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 
 # Compute per-marker transforms
-base_positions = [np.array([0.2644, 0.4008, 0.3694]),
-                  np.array([-0.2657, 0.4083, 0.3808]),
-                  np.array([0.2648, 0.6870, 0.6568]),
-                  np.array([-0.2513, 0.6860, 0.6547])
-                  ]
-base_quats = [np.array([-0.09546, 0.36578, -0.8967, -0.2302]),
-              np.array([0.1145, 0.3425, -0.8921, 0.2715]),
-              np.array([-0.2630, 0.4015, -0.9141 , -0.0498]),
-              np.array([0.079, 0.3750, -0.8983, 0.2144])]
+base_positions = [np.array([0.0050, 0.6524, 0.6232])
 
-cam_positions = [np.array([0.110, -0.097, 0.549]),#1
-                np.array([0.780, -0.139, 1.011]),#0
-                np.array([0.046, 0.135, 0.431]),#3
-                np.array([0.585, 0.165, 0.741])#4
+                  ]
+base_quats = [np.array([-0.3842, -0.0215,  0.0338, -0.9224])
+    ]
+
+cam_positions = [np.array([0.241, 0.077, 0.487])#1
+
                 ]
-cam_quats = [np.array([0.0825, -0.9102, 0.3632, 0.1808]),
-            np.array([-0.9598, -0.04664, -0.2346, -0.1467]),
-            np.array([0.9186, 0.0283, -0.1504, 0.3644]),
-            np.array([-0.9555, 0.0444, -0.2808, 0.07821])]
+cam_quats = [np.array([0.911, 0.083, -0.130, 0.381])]
 # Compute T_base_camera for each marker observation
 
 T_base_cam_estimates = []
-for i in range(4):
+for i in range(1):
     T_base_m = np.eye(4)
     T_base_m[:3, 3] = base_positions[i]
     T_base_m[:3, :3] = R.from_quat(base_quats[i]).as_matrix()
@@ -51,4 +42,5 @@ T_base_camera[:3, 3] = avg_pos
 print("Estimated T_base_camera:\n", T_base_camera)
 print("Position (m):", T_base_camera[:3, 3])
 rot = R.from_matrix(T_base_camera[:3, :3])
-print("Orientation (quat):", rot.as_quat())  # x,y,z,w
+print("Orientation (quaternion xyzw):", rot.as_quat())
+
