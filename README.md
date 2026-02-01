@@ -15,3 +15,8 @@ Hand_eye_calibration -> program files for creation of camera_link, transformatio
   - marker_rcev_to_quat.pt -> helper file for transformation of camera perceived markers rvecs -> quats.
   - pose.py -> used for recording postion of robot
   - Transform.py -> uses collected data from poses of markers relative to camera and robot and transforms them. result is camera_link.
+
+Detection -> Files for the detection of Aruco markers and approach of Robotic arm (early stages)
+  - aruco_to_moveit.py -> Transformation between published detected markers in PoseStamped from camera_link to base_link, simple Approach method (pick and place in progress)
+  - detect_marker.py -> openCV integrated onto class for publishing markers into pose array
+  - detect_marker_sim.py -> hard coded for testing purposes
